@@ -9,7 +9,7 @@
 **/home/pi/barista-rpiLogger/groveLogger/groveLogger.py**…Groveからのセンシングデータをbarista-rasp-serverに送信するプログラムです。（開発担当：加治）
 
 
-## バリスタ運用スクリプト
+## ロガー運用スクリプト
 - **ログを開始する: /home/pi/barista-rpiLogger/barista-log-start.sh**
 - **ログを停止する: /home/pi/barista-rpiLogger/barista-log-kill.sh**
 
@@ -22,7 +22,7 @@
 設定は**/etc/network/interfaces**内で設定されています。
 
 ###wlan0
-見つけたネットワークにDHCPで接続する用です。接続したいSSIDのリストは**/etc/wpa-supplicant/wpa_supplicant.conf**内にあります。
+見つけたネットワークにDHCPで接続する用です。接続したいSSIDは**/etc/wpa-supplicant/wpa_supplicant.conf**内にあります。
 
 ###wlan1
-Adhoc用のWi-Fiです。SSIDがbarista-pi、IPアドレスは192.168.5.1に設定してあります。
+Adhoc用のWi-Fiです。SSIDが**barista-pi**、IPアドレスは**192.168.5.1**に設定してあります。
