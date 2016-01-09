@@ -13,6 +13,14 @@
 - **ログを開始する: /home/pi/barista-rpiLogger/barista-log-start.sh**
 - **ログを停止する: /home/pi/barista-rpiLogger/barista-log-kill.sh**
 
+##配線
+pythonで読み取っているGroveのポートの対応は以下の通りです。
+
+- 照度センサ：A0
+- GPSセンサ：RPISER
+- 温度・湿度センサ：D4
+- 気圧センサ：I2C-3
+
 　
 
 ***※以下現行のハード側設定なので、リポジトリには含まれない情報***
