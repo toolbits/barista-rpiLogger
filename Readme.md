@@ -33,4 +33,4 @@ pythonで読み取っているGroveのポートの対応は以下の通りです
 見つけたネットワークにDHCPで接続する用です。接続したいSSIDは**/etc/wpa-supplicant/wpa_supplicant.conf**内にあります。
 
 ###wlan1
-Adhoc用のWi-Fiです。SSIDが**barista-pi**、IPアドレスは**192.168.5.1**に設定してあります。
+barista-netに接続する用です。
