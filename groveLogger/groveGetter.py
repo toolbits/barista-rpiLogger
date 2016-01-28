@@ -84,13 +84,13 @@ class groveGetter:
 			fix = self.GGA[6]
 			sats = self.GGA[7]
 			alt = self.GGA[9]
-		
+
 			if lat.replace(".","",1).isdigit():
 				lat = self.decimal_degrees(float(lat))
 				#lat = lat / 100.0
 				if lat_ns == "S":
 					lat = -lat
-		
+
 			if long.replace(".","",1).isdigit():
 				long = self.decimal_degrees(float(long))
 				#long = long / 100.0
