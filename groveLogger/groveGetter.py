@@ -59,7 +59,6 @@ class groveGetter:
 		print "start GPS..."
 		while (cnt < 30):
 			self.inp = self.ser.readline()
-			print self.inp
 			if self.inp[:6] == '$GPGGA':
 				gpsSuccess = True
 				break
@@ -77,27 +76,25 @@ class groveGetter:
 
 		if gpsSuccess:
 			self.GGA = self.inp.split(",")
-			t = self.GGA[1]
-			lat = self.GGA[2]
-			lat_ns = self.GGA[3]
-			long = self.GGA[4]
-			long_ew = self.GGA[5]
-			fix = self.GGA[6]
-			sats = self.GGA[7]
-			alt = self.GGA[9]
-
-			if lat.replace(".","",1).isdigit():
-				lat = self.decimal_degrees(float(lat))
-				#lat = lat / 100.0
-				if lat_ns == "S":
-					lat = -lat
-
-			if long.replace(".","",1).isdigit():
-				long = self.decimal_degrees(float(long))
-				#long = long / 100.0
-				if long_ew == "W":
-					long = -long
-
-			self.dataDict["Altitude"] = alt
-			self.dataDict["Latitude"] = lat
-			self.dataDict["Longtitude"] = long
+            if len(self.GGA) > 9:
+				t = self.GGA[1]
+				lat = self.GGA[2]
+				lat_ns = self.GGA[3]
+				long = self.GGA[4]
+				long_ew = self.GGA[5]
+				fix = self.GGA[6]
+				sats = self.GGA[7]
+				alt = self.GGA[9]
+				if lat.replace(".","",1).isdigit():
+					lat = self.decimal_degrees(float(lat))
+					#lat = lat / 100.0
+					if lat_ns == "S":
+						lat = -lat
+                if long.replace(".","",1).isdigit():
+                    long = self.decimal_degrees(float(long))
+                    #long = long / 100.0
+                    if long_ew == "W":
+                        long = -long
+				self.dataDict["Altitude"] = alt
+				self.dataDict["Latitude"] = lat
+				self.dataDict["Longtitude"] = long
