@@ -77,7 +77,7 @@ class groveGetter:
 		if gpsSuccess:
 			self.GGA = self.inp.split(",")
 
-            if len(self.GGA) > 9:
+			if len(self.GGA) > 9:
 				t = self.GGA[1]
 				lat = self.GGA[2]
 				lat_ns = self.GGA[3]
@@ -93,11 +93,12 @@ class groveGetter:
 					if lat_ns == "S":
 						lat = -lat
 
-                if long.replace(".","",1).isdigit():
-                    long = self.decimal_degrees(float(long))
-                    #long = long / 100.0
-                    if long_ew == "W":
-                        long = -long
+				if long.replace(".","",1).isdigit():
+					long = self.decimal_degrees(float(long))
+					#long = long / 100.0
+					if long_ew == "W":
+						long = -long
+
 				self.dataDict["Altitude"] = alt
 				self.dataDict["Latitude"] = lat
 				self.dataDict["Longtitude"] = long
