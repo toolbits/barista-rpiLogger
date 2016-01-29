@@ -59,6 +59,8 @@ class groveGetter:
 		print "start GPS..."
 		while (cnt < 30):
 			self.inp = self.ser.readline()
+            print self.inp
+            
 			if self.inp[:6] == '$GPGGA':
 				gpsSuccess = True
 				break
