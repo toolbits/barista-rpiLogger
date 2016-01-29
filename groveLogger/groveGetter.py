@@ -68,7 +68,7 @@ class groveGetter:
 		try:
 			ind=self.inp.index('$GPGGA', 5, len(self.inp))
 			self.inp = self.inp[ind:]
-            print "->"
+			print "->"
 			print self.inp
 		except ValueError:
 			print "Value error"
