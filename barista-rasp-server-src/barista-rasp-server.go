@@ -1,5 +1,5 @@
 package main
-​
+
 import (
 	"bytes"
 	"encoding/binary"
@@ -9,25 +9,27 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"mime/multipart"
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"path"
 	"strings"
 	"time"
-​
+
 	"github.com/go-martini/martini"
 )
-​
+
 const queueDir = "/var/lib/barista/queue"
-​
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	go ping()
 	go queue()
 	listen()
 }
-​
+
 func queue() {
 	for {
 		dir := queueDir
@@ -54,7 +56,52 @@ func queue() {
 		time.Sleep(5 * time.Second)
 	}
 }
-​
+
+func postImage(id uint64) {
+        out, err := exec.Command("sh", "-c", "avconv -f video4linux2 -s 1280*720 -i /dev/video0 -vframes 1 -f mjpeg pipe:1").Output()
+        if err != nil {
+                log.Print(err)
+        }
+
+        var b bytes.Buffer
+        w := multipart.NewWriter(&b)
+
+        if fw, err := w.CreateFormFile("file", "pic.jpg"); err == nil {
+          if _, err = fw.Write(out); err != nil {
+            log.Print(err)
+            return
+          }
+        } else {
+          log.Print(err)
+          return
+        }
+
+        if err := w.WriteField("id", fmt.Sprintf("%v", id)); err != nil {
+          log.Print(err)
+          return
+        }
+
+        if err := w.WriteField("type", "theta"); err != nil {
+          log.Print(err)
+          return
+        }
+
+        contentType := w.FormDataContentType()
+        w.Close()
+
+        req, err := http.NewRequest("POST", "http://vps.artsat.jp:51966/post/image", &b)
+        if err != nil {
+            log.Print(err)
+            return
+        }
+
+        req.Header.Set("Content-Type", contentType)
+
+        client := http.Client{}
+        res, err := client.Do(req)
+        log.Print(res, err)
+}
+
 func ping() {
 	addr, err := net.ResolveUDPAddr("udp", "255.255.255.255:1900")
 	if err != nil {
@@ -69,11 +116,11 @@ func ping() {
 		time.Sleep(5 * time.Second)
 	}
 }
-​
+
 func listen() {
 	m := martini.Classic()
 	sensors := map[string]interface{}{}
-​
+
 	m.Post("/sensor", func(req *http.Request) string {
 		params := map[string]interface{}{}
 		d := json.NewDecoder(req.Body)
@@ -88,7 +135,7 @@ func listen() {
 		}
 		return "ok"
 	})
-​
+
 	m.Post("/params", func(req *http.Request) string {
 		params := map[string]interface{}{}
 		d := json.NewDecoder(req.Body)
@@ -107,6 +154,7 @@ func listen() {
 				if err == nil {
 					name := queueDir + "/" + fmt.Sprintf("%v", id) + ".json"
 					ioutil.WriteFile(name, j, 0666)
+					postImage(id)
 				} else {
 					log.Print(err)
 				}
