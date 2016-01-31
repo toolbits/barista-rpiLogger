@@ -21,8 +21,8 @@ class groveGetter:
         self.dataDict["p_lat"] = 0
         self.dataDict["p_lon"] = 0
         self.dataDict["p_alt"] = 0
-
-		grovepi.pinMode(pins_brightness, "INPUT")
+        
+        grovepi.pinMode(pins_brightness, "INPUT")
 
 		self.serial = serial.Serial("/dev/ttyAMA0", 9600, timeout = 0)
 		self.serial.flush()
