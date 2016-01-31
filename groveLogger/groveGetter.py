@@ -73,13 +73,14 @@ class groveGetter:
                 lat = self.decimal_degrees(float(lat))
                 if lat_ns == "S":
                     lat = -lat
+                self.dataDict["p_lat"] = lat
             if lon.replace(".", "", 1).isdigit():
                 lon = self.decimal_degrees(float(lon))
                 if lon_ew == "W":
                     lon = -lon
-            self.dataDict["p_lat"] = lat
-            self.dataDict["p_lon"] = lon
-            self.dataDict["p_alt"] = alt
+                self.dataDict["p_lon"] = lon
+            if alt.replace(".", "", 1).isdigit():
+                self.dataDict["p_alt"] = float(alt)
 
     def decimal_degrees(self, raw_degrees):
         degrees = float(raw_degrees) // 100
