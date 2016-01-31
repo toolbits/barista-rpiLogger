@@ -80,6 +80,7 @@ class groveGetter:
             self.dataDict["p_lat"] = lat
             self.dataDict["p_lon"] = lon
             self.dataDict["p_alt"] = alt
+            
     def decimal_degrees(self, raw_degrees):
         degrees = float(raw_degrees) // 100
         d = float(raw_degrees) % 100 / 60
