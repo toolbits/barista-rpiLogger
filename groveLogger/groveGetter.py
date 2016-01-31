@@ -21,13 +21,13 @@ class groveGetter:
         self.dataDict["p_lat"] = 0
         self.dataDict["p_lon"] = 0
         self.dataDict["p_alt"] = 0
-        
+
         grovepi.pinMode(pins_brightness, "INPUT")
 
-		self.serial = serial.Serial("/dev/ttyAMA0", 9600, timeout = 0)
-		self.serial.flush()
+        self.serial = serial.Serial("/dev/ttyAMA0", 9600, timeout = 0)
+        self.serial.flush()
 
-		self.bmp = BMP085(0x77, 1)
+        self.bmp = BMP085(0x77, 1)
         if GPIO.RPI_REVISION == 2 or GPIO.RPI_REVISION == 3:
             smbus.SMBus(1)
         else:
