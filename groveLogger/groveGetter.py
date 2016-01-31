@@ -51,7 +51,7 @@ class groveGetter:
         except:
             print "[logger] update: readPressure error"
 
-		self.serial.flush()
+        self.serial.flush()
         while True:
             gps = self.serial.readline()
             if gps[:6] == "$GPGGA":
@@ -64,24 +64,23 @@ class groveGetter:
             pass
         gga = gps.split(",")
         if len(gga) > 9:
-			lat = gga[2]
-			lat_ns = gga[3]
-			lon = gga[4]
-			lon_ew = gga[5]
-			alt = gga[9]
-			if lat.replace(".", "", 1).isdigit():
-				lat = self.decimal_degrees(float(lat))
-				if lat_ns == "S":
-					lat = -lat
-			if lon.replace(".", "", 1).isdigit():
-				lon = self.decimal_degrees(float(lon))
-				if long_ew == "W":
-					lon = -lon
+            lat = gga[2]
+            lat_ns = gga[3]
+            lon = gga[4]
+            lon_ew = gga[5]
+            alt = gga[9]
+            if lat.replace(".", "", 1).isdigit():
+                lat = self.decimal_degrees(float(lat))
+                if lat_ns == "S":
+                    lat = -lat
+            if lon.replace(".", "", 1).isdigit():
+                lon = self.decimal_degrees(float(lon))
+                if long_ew == "W":
+                    lon = -lon
             self.dataDict["p_lat"] = lat
             self.dataDict["p_lon"] = lon
             self.dataDict["p_alt"] = alt
-
-	def decimal_degrees(self, raw_degrees):
-		degrees = float(raw_degrees) // 100
-		d = float(raw_degrees) % 100 / 60
-		return degrees + d
+    def decimal_degrees(self, raw_degrees):
+        degrees = float(raw_degrees) // 100
+        d = float(raw_degrees) % 100 / 60
+        return degrees + d
