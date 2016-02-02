@@ -6,7 +6,7 @@
 
 **/home/pi/barista-rpiLogger/barista-rasp-server**…バリスタからの信号を受けて、ログをサーバーにアップするプログラムです。（開発担当：橋本）
 
-**/home/pi/barista-rpiLogger/groveLogger/groveLogger.py**…Groveからのセンシングデータをbarista-rasp-serverに送信するプログラムです。（開発担当：加治）
+**/home/pi/barista-rpiLogger/groveLogger/barista-grove-logger.py**…Groveからのセンシングデータをbarista-rasp-serverに送信するプログラムです。（開発担当：加治、堀口）
 
 
 ## ロガー運用スクリプト
@@ -21,7 +21,7 @@ pythonで読み取っているGroveのポートの対応は以下の通りです
 - 温度・湿度センサ：D4
 - 気圧センサ：I2C-3
 
-　
+
 
 ***※以下現行のハード側設定なので、リポジトリには含まれない情報***
 
