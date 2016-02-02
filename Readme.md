@@ -1,6 +1,3 @@
-#Barista-rpi overview
-
-
 ##ファイル構成
 **/home/pi/barista-rpiLogger…**バリスタに関連する実行ファイル等が一式入ったフォルダです。
 
