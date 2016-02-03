@@ -58,7 +58,7 @@ func queue() {
 }
 
 func postImage(id uint64) {
-        out, err := exec.Command("sh", "-c", "avconv -f video4linux2 -s 1280*720 -i /dev/video0 -vframes 1 -f mjpeg pipe:1").Output()
+        out, err := exec.Command("sh", "-c", "sh /var/lib/barista/capture.sh || avconv -f video4linux2 -s 1280*720 -i /dev/video0 -vframes 1 -f mjpeg pipe:1").Output()
         if err != nil {
                 log.Print(err)
         }
